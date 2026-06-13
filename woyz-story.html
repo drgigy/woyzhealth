@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — WOYZ Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #111111; --secondary: #666666; --accent: #2563EB;
+    --accent-light: #EFF6FF; --bg: #FFFFFF; --bg-soft: #F8FAFC;
+    --border: #E8EDF2;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg); color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border); height: 64px;
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: 800px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between; width: 100%;
+  }
+  .nav-logo { font-size: 18px; font-weight: 800; color: var(--primary); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-back {
+    font-size: 14px; font-weight: 500; color: var(--secondary);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--primary); }
+
+  /* LAYOUT */
+  .page { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; }
+
+  /* HERO */
+  .story-hero { padding-bottom: 64px; border-bottom: 1px solid var(--border); margin-bottom: 64px; }
+  .story-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+  }
+  .story-hero h1 {
+    font-size: clamp(36px, 5vw, 56px); font-weight: 800;
+    line-height: 1.08; letter-spacing: -2px; margin-bottom: 24px;
+  }
+  .story-hero h1 em { font-style: normal; color: var(--accent); }
+  .story-hero p {
+    font-size: 18px; line-height: 1.75; color: var(--secondary); max-width: 620px;
+  }
+
+  /* CHAPTER */
+  .chapter { margin-bottom: 72px; }
+  .chapter-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .chapter h2 {
+    font-size: clamp(22px, 3vw, 30px); font-weight: 800;
+    letter-spacing: -0.8px; margin-bottom: 28px; line-height: 1.15;
+    padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .chapter h2 strong { color: var(--accent); font-weight: 800; }
+  .prose {
+    font-size: 16px; line-height: 1.85; color: #333;
+    margin-bottom: 20px; font-weight: 300;
+  }
+  .prose strong { color: var(--primary); font-weight: 600; }
+
+  /* PULL QUOTE */
+  .pull {
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px; margin: 36px 0;
+    background: var(--accent-light); border-radius: 0 8px 8px 0;
+    font-size: 18px; line-height: 1.6; color: var(--primary);
+    font-weight: 500; font-style: italic;
+  }
+
+  /* STATS */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin: 36px 0;
+  }
+  .stat-item {
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px 20px;
+  }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--accent); letter-spacing: -1px; margin-bottom: 6px; }
+  .stat-label { font-size: 13px; color: var(--secondary); line-height: 1.5; }
+  .stat-source { font-size: 11px; color: #aaa; margin-top: 8px; font-style: italic; }
+
+  /* PRINCIPLES */
+  .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 36px 0; }
+  .principle { border-top: 2px solid var(--accent); padding-top: 16px; }
+  .principle-num { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .principle p { font-size: 14px; line-height: 1.6; color: var(--primary); font-weight: 400; }
+
+  /* GLANCE */
+  .glance { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0; }
+  .glance-card { background: var(--bg-soft); border-radius: 10px; padding: 20px 22px; }
+  .glance-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  .glance-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px; color: #333; line-height: 1.5; }
+  .glance-dot { width: 4px; height: 4px; background: var(--accent); border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A0A; padding: 48px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; margin-top: 80px;
+  }
+  footer .logo { font-size: 16px; font-weight: 800; color: #fff; }
+  footer .logo span { color: var(--accent); }
+  footer p { font-size: 13px; color: #475569; }
+  footer a { font-size: 13px; color: #94A3B8; text-decoration: none; }
+  footer a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: 1fr; }
+    .principles { grid-template-columns: 1fr 1fr; }
+    .glance { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="./" class="nav-logo">WOYZ<span>.</span>health</a>
+    <a href="./" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13 7H1M7 13L1 7l6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="story-hero">
+    <div class="story-eyebrow">Designed by Doctors</div>
+    <h1>Vision &<br><em>Philosophy</em></h1>
+    <p>A reference document for clinical and strategic stakeholders who want to understand what WOYZ is, why it was built, and where it is going.</p>
+  </div>
+
+  <!-- FOREWORD -->
+  <div class="chapter" id="foreword">
+    <div class="chapter-label">Foreword</div>
+    <h2>Healthcare is fundamentally <strong>a human profession.</strong></h2>
+    <p class="prose">Before hospitals, before electronic records, before artificial intelligence — there was a conversation. A person in distress spoke about their suffering. Another person listened. That simple interaction became the foundation of medicine.</p>
+    <p class="prose">Thousands of years later, despite extraordinary advances in science and technology, healthcare still begins the same way. Patients describe symptoms through conversation. Doctors arrive at diagnoses through conversation. Trust, empathy, and healing all begin through conversation.</p>
+    <div class="pull">Modern healthcare increasingly asks doctors to divide their attention between patients and computers. The conversation continues — but the connection is often weakened.</div>
+    <p class="prose">WOYZ was built from a single question: what if technology could help doctors become more present, rather than more distracted? This document sets out the philosophy and vision behind that question — and why the answer matters for the future of healthcare.</p>
+  </div>
+
+  <!-- CH1 -->
+  <div class="chapter" id="problem">
+    <div class="chapter-label">Chapter 01</div>
+    <h2>The Problem With <strong>Modern Medicine</strong></h2>
+    <p class="prose">Every doctor understands the challenge. Documentation has become an essential — and increasingly heavy — part of modern healthcare. Clinical notes, visit summaries, referral letters, discharge summaries, procedure notes. The list continues to grow.</p>
+    <p class="prose">Documentation is important. Accurate records improve continuity of care, patient safety, and clinical decision-making. No one disputes this. But documentation comes at a cost — and that cost is attention.</p>
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-num">49%</div>
+        <div class="stat-label">of physician time spent on EHR and desk work</div>
+        <div class="stat-source">Annals of Internal Medicine, 2016</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2×</div>
+        <div class="stat-label">administrative hours for every hour of direct patient care</div>
+        <div class="stat-source">AMA Physician Practice Benchmark Survey</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1 in 3</div>
+        <div class="stat-label">physicians report burnout, citing documentation as primary driver</div>
+        <div class="stat-source">Medscape National Physician Burnout Report</div>
+      </div>
+    </div>
+    <div class="pull">"Every minute spent typing is a minute not spent listening. Every screen interaction competes with human interaction." — The founding observation, WOYZ</div>
+    <p class="prose">The result is a constant tension between caring and documenting. Doctors want to be present. Healthcare systems require documentation. These two demands — both legitimate, both essential — are placed in direct competition by the design of most current systems.</p>
+  </div>
+
+  <!-- CH2 -->
+  <div class="chapter" id="philosophy">
+    <div class="chapter-label">Chapter 02</div>
+    <h2>Why Conversations Are <strong>Clinical Tools</strong></h2>
+    <p class="prose">Medicine is fundamentally a verbal discipline. The clinical history — gathered through structured conversation — remains the most powerful diagnostic tool available to any physician. Studies consistently demonstrate that an accurate history alone leads to the correct diagnosis in the majority of cases, even before examination or investigation.</p>
+    <p class="prose">A doctor who is distracted — typing, clicking, navigating a screen — is a less effective diagnostician. Attention is finite. Every moment spent on documentation is a moment not spent observing, listening, empathising, or thinking.</p>
+    <div class="pull">The stethoscope did not replace the physician's senses — it extended them. Technology in medicine should extend human capability, not compete with human attention.</div>
+    <p class="prose">This is the clinical case for WOYZ. It is not simply about convenience or efficiency. It is about restoring the quality of the clinical interaction — which is, ultimately, the foundation of good medicine.</p>
+  </div>
+
+  <!-- CH3 -->
+  <div class="chapter" id="woyz-philosophy">
+    <div class="chapter-label">Chapter 03</div>
+    <h2>The WOYZ <strong>Philosophy</strong></h2>
+    <p class="prose">WOYZ is built on a single founding principle: <strong>technology in healthcare should be invisible.</strong> The best clinical tool is the one the doctor never thinks about. It does its job quietly, completely, and without demanding attention.</p>
+    <p class="prose">This principle shapes every design decision. Doctor WOYZ does not ask doctors to learn new systems. It does not require workflow redesign. It does not demand IT involvement. It simply listens — and produces documentation that the doctor can review, approve, and use.</p>
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-num">PRINCIPLE 01</div>
+        <p>The conversation between doctor and patient is sacred. Technology must protect it, not interrupt it.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">PRINCIPLE 02</div>
+        <p>Doctors must remain in complete control. AI assists. The doctor decides. Always.</p>
+      </div>
+      <div class="principle">
+        <div class="principle-num">PRINCIPLE 03</div>
+        <p>The best technology disappears. It does its job without demanding attention or training.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH4 -->
+  <div class="chapter" id="what-it-is">
+    <div class="chapter-label">Chapter 04</div>
+    <h2>What is <strong>WOYZ</strong></h2>
+    <p class="prose">WOYZ — pronounced "voice" — is a voice-powered clinical documentation assistant. It is not an EMR. It is not a practice management system. It is not a billing tool. It is a single-purpose application that does one thing exceptionally well: it listens to doctors and produces structured clinical documentation.</p>
+    <p class="prose">Doctor WOYZ works in two modes. In <strong>ambient listening</strong> mode, it captures the consultation conversation and transforms it into a structured visit note. In <strong>dictation</strong> mode, the doctor speaks a clinical summary directly and the note is generated immediately.</p>
+    <div class="glance">
+      <div class="glance-card">
+        <div class="glance-label">What WOYZ Is</div>
+        <div class="glance-item"><div class="glance-dot"></div> A voice-powered documentation assistant</div>
+        <div class="glance-item"><div class="glance-dot"></div> A tool that fits around existing workflows</div>
+        <div class="glance-item"><div class="glance-dot"></div> A way to restore clinical presence</div>
+        <div class="glance-item"><div class="glance-dot"></div> A product designed by practicing doctors</div>
+      </div>
+      <div class="glance-card">
+        <div class="glance-label">What WOYZ Is Not</div>
+        <div class="glance-item"><div class="glance-dot"></div> An EMR or practice management system</div>
+        <div class="glance-item"><div class="glance-dot"></div> A system that requires IT integration</div>
+        <div class="glance-item"><div class="glance-dot"></div> A tool that makes clinical decisions</div>
+        <div class="glance-item"><div class="glance-dot"></div> A replacement for the doctor's judgment</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH5 -->
+  <div class="chapter" id="designed-by-doctors">
+    <div class="chapter-label">Chapter 05</div>
+    <h2>Designed <strong>by Doctors</strong></h2>
+    <p class="prose">Most healthcare technology is designed by software engineers who have never practiced medicine. They understand systems, workflows, and interfaces. But they do not understand the texture of a difficult consultation, the pressure of a busy ward round, or the moment when a patient reveals something unexpected and the doctor must give their complete attention.</p>
+    <p class="prose">WOYZ was built differently. It was designed from the inside — by a clinician who has experienced the documentation burden directly, and who understood what a solution would need to feel like before a single line of code was written.</p>
+    <div class="pull">The best healthcare technology is designed by people who have sat on both sides of the consultation room.</div>
+  </div>
+
+  <!-- CH6 -->
+  <div class="chapter" id="bigger-vision">
+    <div class="chapter-label">Chapter 06 — 07</div>
+    <h2>How Transformation Happens &amp; <strong>The Bigger Vision</strong></h2>
+    <p class="prose">Healthcare transformation does not happen through mandates. It happens through adoption — one doctor at a time, one clinic at a time, one department at a time. WOYZ is designed for incremental adoption. A single doctor can begin using it today, without any institutional decision, without any IT involvement, without any workflow redesign.</p>
+    <p class="prose">As individual doctors experience the difference — more time with patients, less time at keyboards, better quality of clinical interaction — adoption spreads naturally through word of mouth and demonstrated results.</p>
+    <p class="prose">Doctor WOYZ is the first product in a broader vision: a voice layer built specifically for healthcare. The next step is Nurse WOYZ — bringing the same philosophy to nursing documentation, handovers, and care coordination. Each product built with the same principle: invisible technology that protects the clinical conversation.</p>
+    <div class="pull">The goal is not to digitise healthcare. The goal is to humanise it — and to use technology as the means to that end.</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="logo">WOYZ<span>.</span>health</div>
+  <p>Giving Healthcare Back Its Voice</p>
+  <a href="./">← Back to Home</a>
+</footer>
+
+</body>
+</html>

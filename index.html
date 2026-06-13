@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WOYZ Health — Giving Healthcare Back Its Voice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #111111;
+    --secondary: #666666;
+    --accent: #2563EB;
+    --accent-light: #EFF6FF;
+    --bg: #FFFFFF;
+    --bg-soft: #F8FAFC;
+    --border: #E8EDF2;
+    --radius: 12px;
+    --radius-lg: 20px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.10);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--primary);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: 1120px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%;
+  }
+  .nav-logo {
+    font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--primary); text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: var(--secondary);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--primary); }
+  .btn-nav {
+    background: var(--primary); color: #fff;
+    padding: 9px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .btn-nav:hover { background: #2a2a2a; transform: translateY(-1px); }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    padding: 14px 28px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+  }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(37,99,235,0.35); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--primary);
+    padding: 14px 24px; border-radius: 10px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: #cbd5e1; background: var(--bg-soft); }
+
+  /* CONTAINER */
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .container-sm { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* SECTION */
+  section { padding: 100px 0; }
+  section.alt { background: var(--bg-soft); }
+
+  /* EYEBROW */
+  .eyebrow {
+    display: inline-block;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  /* HERO */
+  #hero {
+    padding: 160px 0 100px;
+    background: var(--bg);
+    position: relative; overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 1120px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent-light); color: var(--accent);
+    padding: 8px 18px; border-radius: 100px;
+    font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+  .hero-pronunciation {
+    font-size: 13px; color: var(--secondary); margin-bottom: 20px;
+    letter-spacing: 0;
+  }
+  .hero-pronunciation em { font-style: normal; color: var(--primary); font-weight: 500; }
+  h1 {
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -2px; color: var(--primary);
+    margin-bottom: 24px;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    font-size: 18px; line-height: 1.7; color: var(--secondary);
+    margin-bottom: 40px; max-width: 480px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: relative; display: flex; justify-content: center; align-items: center;
+  }
+  .hero-card {
+    background: #fff; border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hover);
+    border: 1px solid var(--border);
+    padding: 32px;
+    width: 100%; max-width: 420px;
+    position: relative;
+  }
+  .hero-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .hc-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .hc-info h4 { font-size: 14px; font-weight: 600; }
+  .hc-info p { font-size: 12px; color: var(--secondary); }
+  .listening-bar {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--accent-light); border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 20px;
+  }
+  .lb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s ease infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+  .lb-label { font-size: 12px; font-weight: 600; color: var(--accent); }
+  .waveform {
+    display: flex; align-items: center; gap: 3px; height: 24px; margin-left: auto;
+  }
+  .waveform-bar {
+    width: 3px; border-radius: 2px; background: var(--accent);
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  .waveform-bar:nth-child(1){height:8px;animation-delay:0s}
+  .waveform-bar:nth-child(2){height:16px;animation-delay:0.1s}
+  .waveform-bar:nth-child(3){height:22px;animation-delay:0.2s}
+  .waveform-bar:nth-child(4){height:14px;animation-delay:0.3s}
+  .waveform-bar:nth-child(5){height:20px;animation-delay:0.4s}
+  .waveform-bar:nth-child(6){height:10px;animation-delay:0.5s}
+  .waveform-bar:nth-child(7){height:18px;animation-delay:0.6s}
+  @keyframes wave { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.4)} }
+  .hc-note-preview {
+    font-size: 13px; color: var(--secondary); line-height: 1.7;
+    border-left: 3px solid var(--accent); padding-left: 12px;
+  }
+  .hc-note-preview strong { color: var(--primary); }
+  .hc-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  .hc-status { font-size: 12px; color: var(--secondary); }
+  .hc-actions { display: flex; gap: 8px; }
+  .hc-btn {
+    font-size: 12px; font-weight: 600; padding: 6px 12px;
+    border-radius: 6px; border: none; cursor: pointer;
+  }
+  .hc-btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--primary); }
+  .hc-btn-solid { background: var(--accent); color: #fff; }
+
+  /* Floating chips */
+  .hero-chip {
+    position: absolute;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 100px; padding: 8px 14px;
+    font-size: 12px; font-weight: 600; color: var(--primary);
+    box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+  .chip-icon { font-size: 14px; }
+  .chip-1 { top: -16px; left: -20px; }
+  .chip-2 { bottom: 20px; left: -32px; }
+  .chip-3 { top: 40px; right: -24px; }
+
+  /* SECTION HEADINGS */
+  h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
+    color: var(--primary); margin-bottom: 16px;
+  }
+  h2 em { font-style: normal; color: var(--accent); }
+  .section-sub {
+    font-size: 17px; line-height: 1.7; color: var(--secondary);
+    max-width: 560px;
+  }
+  .section-head { margin-bottom: 64px; }
+  .section-head.centered { text-align: center; }
+  .section-head.centered .section-sub { margin: 0 auto; }
+
+  /* PROBLEM — just the dark strip, no cards */
+  #problem { padding: 80px 0; }
+  .problem-statement {
+    background: var(--primary); border-radius: var(--radius-lg);
+    padding: 72px 56px; text-align: center;
+  }
+  .problem-statement p {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700; color: #fff; line-height: 1.4; letter-spacing: -0.5px;
+  }
+  .problem-statement em { color: #93C5FD; font-style: normal; }
+
+  /* SOLUTION */
+  .solution-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .sol-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 28px;
+    box-shadow: var(--shadow); transition: all 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .sol-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), #60A5FA);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .sol-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  .sol-card:hover::before { opacity: 1; }
+  .sol-num { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 20px; }
+  .sol-icon { font-size: 36px; margin-bottom: 16px; }
+  .sol-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .sol-card p { font-size: 14px; color: var(--secondary); line-height: 1.65; }
+
+  /* WHY WOYZ */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .why-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    transition: all 0.2s;
+  }
+  .why-card:hover { border-color: #CBD5E1; box-shadow: var(--shadow); }
+  .why-icon { font-size: 28px; margin-bottom: 14px; }
+  .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .why-card p { font-size: 13px; color: var(--secondary); line-height: 1.6; }
+
+  /* HOW IT WORKS */
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute; top: 32px; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+    z-index: 0;
+  }
+  .step {
+    text-align: center; padding: 0 16px;
+    position: relative; z-index: 1;
+  }
+  .step-num {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px; font-size: 22px;
+    box-shadow: 0 0 0 6px #fff;
+    transition: all 0.2s;
+  }
+  .step:hover .step-num { border-color: var(--accent); }
+  .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+  .step p { font-size: 14px; color: var(--secondary); line-height: 1.6; }
+
+  /* COMPARISON */
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .compare-card {
+    border-radius: var(--radius-lg); padding: 36px 32px; border: 1px solid var(--border);
+  }
+  .compare-card.traditional { background: var(--bg-soft); }
+  .compare-card.woyz { background: var(--primary); }
+  .compare-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+  .compare-card.traditional h3 { color: var(--secondary); }
+  .compare-card.woyz h3 { color: #fff; }
+  .compare-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 14px; font-size: 14px; line-height: 1.5;
+  }
+  .compare-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+  .compare-card.traditional .compare-item { color: var(--secondary); }
+  .compare-card.woyz .compare-item { color: #E2E8F0; }
+  .compare-card.woyz .compare-item strong { color: #fff; }
+
+  /* VISION */
+  #vision {
+    background: var(--primary);
+    text-align: center;
+  }
+  #vision h2 { color: #fff; }
+  .vision-lines { margin-top: 48px; display: flex; flex-direction: column; gap: 20px; }
+  .vision-line {
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: #94A3B8; line-height: 1.5;
+    transition: color 0.3s;
+  }
+  .vision-line:hover { color: #fff; }
+  .vision-final {
+    margin-top: 48px; padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 700; color: #60A5FA;
+  }
+  /* "Know more" link in vision */
+  .vision-learn {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 32px;
+    font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.45);
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .vision-learn:hover { color: rgba(255,255,255,0.75); }
+
+  /* ECOSYSTEM */
+  #ecosystem { padding: 80px 0; }
+  .eco-grid {
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .eco-pill {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 100px;
+    font-size: 14px; font-weight: 500; border: 1.5px solid var(--border);
+    color: var(--secondary);
+  }
+  .eco-pill.active { border-color: var(--accent); color: var(--accent); font-weight: 600; background: var(--accent-light); }
+  .eco-badge {
+    font-size: 10px; font-weight: 600; padding: 2px 7px;
+    border-radius: 100px; background: var(--bg-soft); color: var(--secondary);
+  }
+  .eco-pill.active .eco-badge { background: var(--accent); color: #fff; }
+
+
+  /* FINAL CTA */
+  #finalcta {
+    padding: 140px 24px;
+    text-align: center; background: var(--bg);
+  }
+  #finalcta h2 {
+    font-size: clamp(36px, 5vw, 60px);
+    letter-spacing: -2px; line-height: 1.05; margin-bottom: 40px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A0A; color: #fff;
+    padding: 64px 0 32px;
+  }
+  .footer-inner {
+    max-width: 1120px; margin: 0 auto; padding: 0 24px;
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 48px; gap: 40px; flex-wrap: wrap;
+  }
+  .footer-brand h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .footer-brand span { color: #2563EB; }
+  .footer-brand p { font-size: 13px; color: #64748B; line-height: 1.6; max-width: 240px; }
+  .footer-links { display: flex; gap: 64px; }
+  .footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #475569; margin-bottom: 16px; }
+  .footer-col a {
+    display: block; font-size: 14px; color: #94A3B8; text-decoration: none;
+    margin-bottom: 10px; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid #1E293B; padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 13px; color: #475569; }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { display: none; }
+    .solution-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .steps-grid::before { display: none; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-links { gap: 32px; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 72px 0; }
+    #hero { padding: 120px 0 72px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .problem-statement { padding: 48px 24px; }
+    .footer-top { flex-direction: column; }
+    .footer-links { flex-direction: column; gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-inner">
+    <a href="./" class="nav-logo">WOYZ<span>.</span>health</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="woyz-story.html">Our Story</a></li>
+    </ul>
+    <a href="#demo" class="btn-nav">Book a Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Doctor WOYZ
+      </div>
+      <h1>Giving Healthcare<br>Back Its <em>Voice</em></h1>
+      <p class="hero-sub">Voice-powered clinical documentation, designed by doctors. Spend less time typing. Spend more time listening.</p>
+      <div class="hero-cta">
+        <a href="#demo" class="btn-primary">
+          Book a Demo
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div style="position:relative; width:100%; max-width:420px;">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="hc-avatar">🩺</div>
+            <div class="hc-info">
+              <h4>Dr. Thomas — Neurology</h4>
+              <p>Active Consultation · Ward 4B</p>
+            </div>
+          </div>
+          <div class="listening-bar">
+            <div class="lb-dot"></div>
+            <span class="lb-label">Listening</span>
+            <div class="waveform">
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+              <div class="waveform-bar"></div>
+            </div>
+          </div>
+          <div class="hc-note-preview">
+            <strong>Chief Complaint:</strong> 3-day history of right-sided weakness and slurred speech.<br><br>
+            <strong>Assessment:</strong> Acute ischaemic stroke, MCA territory. NIHSS 8. ASPECTS 9 on CT…
+          </div>
+          <div class="hc-footer">
+            <span class="hc-status">Draft ready for review</span>
+            <div class="hc-actions">
+              <button class="hc-btn hc-btn-outline">Edit</button>
+              <button class="hc-btn hc-btn-solid">Approve</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-chip chip-1"><span class="chip-icon">⏱</span> 3x faster notes</div>
+        <div class="hero-chip chip-2"><span class="chip-icon">🔒</span> Doctor in control</div>
+        <div class="hero-chip chip-3"><span class="chip-icon">📋</span> No EMR needed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM — dark statement strip only -->
+<section id="problem">
+  <div class="container">
+    <div class="problem-statement reveal">
+      <p>Every minute spent <em>typing</em><br><em>is a minute not spent listening.</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="features" class="alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Solution</span>
+      <h2>Meet <em>Doctor WOYZ</em></h2>
+      <p class="section-sub">A voice-powered clinical documentation assistant built around the way doctors actually work.</p>
+    </div>
+    <div class="solution-grid">
+      <div class="sol-card reveal">
+        <div class="sol-num">01</div>
+        <div class="sol-icon">🎙️</div>
+        <h3>Ambient Listening</h3>
+        <p>Place your phone on the desk. Doctor WOYZ listens to the consultation naturally and transforms it into a structured visit note — without interrupting the conversation.</p>
+      </div>
+      <div class="sol-card reveal reveal-delay-1">
+        <div class="sol-num">02</div>
+        <div class="sol-icon">📝</div>
+        <h3>Medical Dictation</h3>
+        <p>Prefer to dictate? Speak your clinical summary and Doctor WOYZ converts your voice into professional documentation instantly, with specialty-aware terminology.</p>
+      </div>
+      <div class="sol-card reveal reveal-delay-2">
+        <div class="sol-num">03</div>
+        <div class="sol-icon">✅</div>
+        <h3>Review & Approve</h3>
+        <p>Every note is yours. Review, edit, approve. The doctor remains fully in clinical and legal control before anything is finalised or shared.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY WOYZ -->
+<section id="why">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why WOYZ</span>
+      <h2>Designed Around How<br>Doctors Actually Work</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">🩺</div>
+        <h3>Designed by Doctors</h3>
+        <p>Built by clinicians who understood the problem before writing a single line of code.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">🔌</div>
+        <h3>No EMR Integration Required</h3>
+        <p>No IT approval. No vendor negotiation. No six-month implementation timeline.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">🔄</div>
+        <h3>Works With Existing Workflows</h3>
+        <p>Copy. Paste. Done. Fits into whatever system you're already using today.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">📱</div>
+        <h3>Any Device, Any Setting</h3>
+        <p>Mobile, tablet, or laptop. Ward round, clinic, ICU, or home visit. Always ready.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">🎙️</div>
+        <h3>Ambient + Dictation Modes</h3>
+        <p>Two modes, one app. Use whichever fits the moment. Switch seamlessly between them.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">👨‍⚕️</div>
+        <h3>Doctor Always in Control</h3>
+        <p>AI drafts. You decide. Nothing leaves the app without your explicit approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="alt">
+  <div class="container">
+    <div class="section-head centered">
+      <span class="eyebrow">How It Works</span>
+      <h2>Four Steps to<br>Better Consultations</h2>
+      <p class="section-sub" style="max-width:680px;">Start documenting in seconds. No training. No configuration. No IT team required.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">🎙️</div>
+        <h3>Listen</h3>
+        <p>Doctor WOYZ captures the consultation — through ambient listening or voice dictation.</p>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">⚡</div>
+        <h3>Generate</h3>
+        <p>A structured visit note is created automatically, ready for your review.</p>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">✏️</div>
+        <h3>Review</h3>
+        <p>The doctor reviews the draft, makes any edits, and approves the final note.</p>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">📤</div>
+        <h3>Share</h3>
+        <p>Copy, print, email, or paste into any existing EMR or hospital system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="container">
+    <div class="section-head centered">
+      <span class="eyebrow">Key Difference</span>
+      <h2>Not Another EMR</h2>
+      <p class="section-sub">Doctor WOYZ doesn't replace your existing systems. It fits around them — immediately.</p>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="compare-card traditional">
+        <h3>Traditional AI Documentation</h3>
+        <div class="compare-item"><span class="compare-icon">✗</span> Complex EMR integration required</div>
+        <div class="compare-item"><span class="compare-icon">✗</span> Disrupts existing clinical workflows</div>
+        <div class="compare-item"><span class="compare-icon">✗</span> Months of implementation time</div>
+        <div class="compare-item"><span class="compare-icon">✗</span> Dependent on IT infrastructure</div>
+        <div class="compare-item"><span class="compare-icon">✗</span> Hospital-wide rollout required</div>
+      </div>
+      <div class="compare-card woyz">
+        <h3>Doctor WOYZ</h3>
+        <div class="compare-item"><span class="compare-icon">✓</span> <span><strong>No integration</strong> — works standalone</span></div>
+        <div class="compare-item"><span class="compare-icon">✓</span> <span><strong>Works immediately</strong> — same day</span></div>
+        <div class="compare-item"><span class="compare-icon">✓</span> <span><strong>Fits existing</strong> clinical workflow</span></div>
+        <div class="compare-item"><span class="compare-icon">✓</span> <span><strong>Simple copy and paste</strong> into any EMR</span></div>
+        <div class="compare-item"><span class="compare-icon">✓</span> <span><strong>One doctor can start</strong> today</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="container-sm" style="text-align:center;">
+    <span class="eyebrow" style="color:#60A5FA;">Our Vision</span>
+    <h2>Healthcare Begins With<br>A Conversation</h2>
+    <div class="vision-lines">
+      <p class="vision-line">Patients describe symptoms through conversations.</p>
+      <p class="vision-line">Doctors diagnose through conversations.</p>
+      <p class="vision-line">Empathy is built through conversations.</p>
+      <p class="vision-line">Trust is built through conversations.</p>
+      <p class="vision-line">Healing begins through conversations.</p>
+    </div>
+    <div class="vision-final">
+      WOYZ exists to protect those conversations.
+    </div>
+    <a href="woyz-story.html" class="vision-learn">
+      Read our full vision &amp; philosophy
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The WOYZ Ecosystem</span>
+      <h2>Built to Grow With<br>Every Care Setting</h2>
+      <p class="section-sub">Doctor WOYZ is just the beginning. A purpose-built voice layer for every clinical specialty.</p>
+    </div>
+    <div class="eco-grid reveal">
+      <div class="eco-pill active">
+        <span>🩺</span> Doctor WOYZ
+        <span class="eco-badge">Available</span>
+      </div>
+      <div class="eco-pill">
+        <span>👩‍⚕️</span> Nurse WOYZ
+        <span class="eco-badge">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FINAL CTA -->
+<section id="demo">
+  <div id="finalcta">
+    <h2>Spend Less Time Documenting.<br><em>Spend More Time Caring.</em></h2>
+    <a href="mailto:hello@woyz.health" class="btn-primary" style="font-size:16px; padding: 16px 36px;">
+      Book a Demo
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <p style="margin-top:20px; color:var(--secondary); font-size:14px;">No commitment. No IT team needed. Start the same day.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>WOYZ<span>.</span>health</h3>
+        <p>Giving Healthcare Back Its Voice</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#how">How It Works</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#demo">Book Demo</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#vision">Vision</a>
+          <a href="woyz-story.html">Our Story</a>
+          <a href="mailto:hello@woyz.health">Contact</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 WOYZ Health. All rights reserved.</p>
+      <p>Designed by doctors, for doctors.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
