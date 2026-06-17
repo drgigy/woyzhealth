@@ -117,14 +117,6 @@
     max-width: 1120px; margin: 0 auto; padding: 0 24px;
     display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--accent-light); color: var(--accent);
-    padding: 8px 18px; border-radius: 100px;
-    font-size: 16px; font-weight: 800; letter-spacing: -0.3px;
-    margin-bottom: 20px;
-  }
-  .hero-badge-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
   .hero-pronunciation {
     font-size: 13px; color: var(--secondary); margin-bottom: 20px;
     letter-spacing: 0;
@@ -401,12 +393,31 @@
     max-width: 1120px; margin: 0 auto; padding: 0 24px;
   }
   .footer-top {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 48px; gap: 40px; flex-wrap: wrap;
+    display: grid; grid-template-columns: 1fr 1.35fr auto;
+    align-items: flex-start; margin-bottom: 48px; gap: 64px;
   }
   .footer-brand h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
   .footer-brand span { color: #2563EB; }
   .footer-brand p { font-size: 13px; color: #64748B; line-height: 1.6; max-width: 240px; }
+  .footer-contact h4 {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #475569; margin-bottom: 16px;
+  }
+  .footer-contact-row { margin-bottom: 13px; }
+  .footer-contact-label {
+    display: block; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: #475569; margin-bottom: 3px;
+  }
+  .footer-contact a {
+    color: #94A3B8; text-decoration: none; font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-contact a:hover { color: #fff; }
+  .footer-contact address {
+    color: #94A3B8; font-size: 13px; line-height: 1.6;
+    font-style: normal;
+  }
   .footer-links { display: flex; gap: 64px; }
   .footer-col h4 { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #475569; margin-bottom: 16px; }
   .footer-col a {
@@ -440,6 +451,9 @@
     .steps-grid::before { display: none; }
     .compare-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-contact { grid-column: 1; grid-row: 2; }
+    .footer-links { grid-column: 2; grid-row: 1 / span 2; }
     .footer-links { gap: 32px; }
     .nav-links { display: none; }
   }
@@ -449,7 +463,9 @@
     .why-grid { grid-template-columns: 1fr; }
     .steps-grid { grid-template-columns: 1fr; }
     .problem-statement { padding: 48px 24px; }
-    .footer-top { flex-direction: column; }
+    .footer-top { display: flex; flex-direction: column; }
+    .footer-contact { order: 2; }
+    .footer-links { order: 3; }
     .footer-links { flex-direction: column; gap: 24px; }
   }
 </style>
@@ -474,12 +490,8 @@
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        Doctor WOYZ
-      </div>
       <h1>Giving Healthcare<br>Back Its <em>Voice</em></h1>
-      <p class="hero-sub">Voice-powered clinical documentation, designed by doctors. Spend less time typing. Spend more time listening.</p>
+      <p class="hero-sub">Voice-powered clinical documentation designed by doctors.<br>Spend less time typing. Spend more time listening.</p>
       <div class="hero-cta">
         <a href="#demo" class="btn-primary">
           Book a Demo
@@ -535,7 +547,7 @@
 <section id="problem">
   <div class="container">
     <div class="problem-statement reveal">
-      <p>Every minute spent <em>typing</em><br><em>is a minute not spent listening.</em></p>
+      <p>Every minute spent <em>typing</em><br><em>is a minute not listening.</em></p>
     </div>
   </div>
 </section>
@@ -545,7 +557,7 @@
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">The Solution</span>
-      <h2>Meet <em>Doctor WOYZ</em></h2>
+      <h2><em>Doctor WOYZ</em></h2>
       <p class="section-sub">A voice-powered clinical documentation assistant built around the way doctors actually work.</p>
     </div>
     <div class="solution-grid">
@@ -575,7 +587,7 @@
 <section id="why">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow">Why WOYZ</span>
+      <span class="eyebrow">Why Doctor WOYZ</span>
       <h2>Designed Around How<br>Doctors Actually Work</h2>
     </div>
     <div class="why-grid">
@@ -687,9 +699,6 @@
       <p class="vision-line">Trust is built through conversations.</p>
       <p class="vision-line">Healing begins through conversations.</p>
     </div>
-    <div class="vision-final">
-      WOYZ exists to protect those conversations.
-    </div>
     <a href="woyz-story.html" class="vision-learn">
       Read our full vision &amp; philosophy
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -723,7 +732,7 @@
 <section id="demo">
   <div id="finalcta">
     <h2>Spend Less Time Documenting.<br><em>Spend More Time Caring.</em></h2>
-    <a href="mailto:hello@woyz.health" class="btn-primary" style="font-size:16px; padding: 16px 36px;">
+    <a href="mailto:info@woyz.health" class="btn-primary" style="font-size:16px; padding: 16px 36px;">
       Book a Demo
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
@@ -739,6 +748,21 @@
         <h3>WOYZ<span>.</span>health</h3>
         <p>Giving Healthcare Back Its Voice</p>
       </div>
+      <div class="footer-contact" id="contact">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-row">
+          <span class="footer-contact-label">Email</span>
+          <a href="mailto:info@woyz.health">info@woyz.health</a>
+        </div>
+        <div class="footer-contact-row">
+          <span class="footer-contact-label">WhatsApp</span>
+          <a href="https://wa.me/919846055990" target="_blank" rel="noopener">+91 98460 55990</a>
+        </div>
+        <div class="footer-contact-row">
+          <span class="footer-contact-label">Address</span>
+          <address>WOYZ Health, Tapasya Building<br>Infopark, Kakkanad, Kochi<br>Kerala, India</address>
+        </div>
+      </div>
       <div class="footer-links">
         <div class="footer-col">
           <h4>Product</h4>
@@ -751,7 +775,7 @@
           <h4>Company</h4>
           <a href="#vision">Vision</a>
           <a href="woyz-story.html">Our Story</a>
-          <a href="mailto:hello@woyz.health">Contact</a>
+          <a href="#contact">Contact</a>
           <a href="#">LinkedIn</a>
         </div>
       </div>
