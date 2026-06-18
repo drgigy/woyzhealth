@@ -869,8 +869,7 @@
     <span class="eyebrow">Book a Demo</span>
     <h2 id="demo-modal-title">Tell us about your practice</h2>
     <p class="demo-intro">Share a few details and we will prepare a demo conversation for Doctor WOYZ.</p>
-    <form class="demo-form" id="demo-form" action="https://formspree.io/f/mlgkkjaj" method="POST">
-      <input type="hidden" name="_subject" value="Doctor WOYZ demo request">
+    <form class="demo-form" id="demo-form">
       <div class="form-field">
         <label for="demo-name">Name</label>
         <input id="demo-name" name="name" type="text" autocomplete="name" required>
@@ -893,12 +892,27 @@
       </div>
       <button class="btn-primary demo-submit" type="submit">Submit Request</button>
       <p class="demo-status" id="demo-status" aria-live="polite"></p>
-      <p class="demo-note">Your request will be sent directly to our demo inbox. We will contact you shortly.</p>
+      <p class="demo-note">Your request will be saved securely. Our team will contact you shortly.</p>
     </form>
   </div>
 </div>
 
-<script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8XIxRIMpVLkMioaohwuBCyGZVtVawwYs",
+    authDomain: "woyz-health-demo-request.firebaseapp.com",
+    projectId: "woyz-health-demo-request",
+    storageBucket: "woyz-health-demo-request.firebasestorage.app",
+    messagingSenderId: "783719100742",
+    appId: "1:783719100742:web:8f1ae53c7e72af92bff547"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -948,13 +962,16 @@
     demoStatus.className = 'demo-status';
 
     try {
-      const response = await fetch(demoForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+      await addDoc(collection(db, 'demoRequests'), {
+        name: formData.get('name').trim(),
+        email: formData.get('email').trim(),
+        mobile: formData.get('mobile').trim(),
+        specialty: formData.get('specialty').trim(),
+        message: formData.get('message').trim(),
+        status: 'new',
+        submittedAt: serverTimestamp(),
+        source: 'woyz.health'
       });
-
-      if (!response.ok) throw new Error('Form submission failed');
 
       demoForm.reset();
       demoStatus.textContent = 'Thank you. Your demo request has been sent successfully.';
